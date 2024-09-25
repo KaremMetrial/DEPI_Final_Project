@@ -90,7 +90,7 @@
             <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
                 <div class="fp__single_team">
                     <div class="fp__single_team_img">
-                        <img src="" alt="team" class="img-fluid w-100">
+                        <img src="{{ asset('web/images/chef_4.jpg') }}" alt="team" class="img-fluid w-100">
                     </div>
                     <div class="fp__single_team_text">
                         <h4>naurin nipu</h4>

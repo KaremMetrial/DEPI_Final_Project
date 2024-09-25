@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/responsive.css') }}">
+    @stack('web-css')
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
