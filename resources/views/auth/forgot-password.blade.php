@@ -79,8 +79,8 @@
                                 </div>
                             </form>
                             <p class="create_account d-flex justify-content-between">
-                                <a href="sign_in.html">login</a>
-                                <a href="sign_up.html">Create Account</a>
+                                <a href="{{ route('login') }}">login</a>
+                                <a href="{{ route('register') }}">Create Account</a>
                             </p>
                         </div>
                     </div>

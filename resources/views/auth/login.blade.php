@@ -77,14 +77,14 @@
                     <div class="col-xxl-5 col-xl-6 col-md-9 col-lg-7 m-auto">
                         <div class="fp__login_area">
                             <h2>Welcome back!</h2>
-                            <p>sign in to continue</p>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label for="email">{{ __('Email') }}</label>
-                                            <input class="border border-0 rounded-pill" id="email"  type="email" name="email" value="{{old('email')}}"
+                                            <input class="border border-0 rounded-pill" id="email" type="email"
+                                                   name="email" value="{{old('email')}}"
                                                    placeholder="Email" required autofocus autocomplete="username">
                                         </div>
                                     </div>
@@ -102,21 +102,23 @@
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput fp__login_check_area">
                                             <div class="form-check">
-                                                <input class="form-check-input" name="remember" type="checkbox" value=""
-                                                       id="remember_me">
                                                 <label class="form-check-label" for="remember_me">
                                                     {{ __('Remember me') }}
                                                 </label>
+                                                <input class="form-check-input" name="remember" type="checkbox" value=""
+                                                       id="remember_me">
+
                                             </div>
 
+                                            <div class="flex">
 
-                                            @if (Route::has('password.request'))
-                                                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                   href="{{ route('password.request') }}">
-                                                    {{ __('Forgot your password?') }}
-                                                </a>
-                                            @endif
-
+                                                @if (Route::has('password.request'))
+                                                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                       href="{{ route('password.request') }}">
+                                                        {{ __('Forgot your password?') }}
+                                                    </a>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
 
@@ -135,7 +137,8 @@
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                             </ul>
-                            <p class="create_account">Dont’t have an aceount ? <a href="sign_up.html">Create Account</a>
+                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create
+                                    Account</a>
                             </p>
                         </div>
                     </div>
