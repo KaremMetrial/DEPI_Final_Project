@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{--<x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -22,4 +22,74 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout> --}}
+@extends('.web.layouts.master')
+@section('content')
+
+    <!--=============================
+        BREADCRUMB START
+    ==============================-->
+    <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
+        <div class="fp__breadcrumb_overlay">
+            <div class="container">
+                <div class="fp__breadcrumb_text">
+                    <h1>forgot password</h1>
+                    <ul>
+                        <li><a href="index.html">home</a></li>
+                        <li><a href="#">forgot password</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=============================
+        BREADCRUMB END
+    ==============================-->
+
+
+    <!--=========================
+        FORGOT PASSWORD START
+    ==========================-->
+    <section class="fp__signin" style="background: url({{ asset('web/images/login_bg.jpg') }});">
+        <div class="fp__signin_overlay pt_125 xs_pt_95 pb_100 xs_pb_70">
+            <div class="container">
+                <div class="row wow fadeInUp" data-wow-duration="1s">
+                    <div class="col-xxl-5 col-xl-6 col-md-9 col-lg-7 m-auto">
+                        <div class="fp__login_area">
+                            <h2>Welcome back!</h2>
+                            <p>forgot password</p>
+                            <form method="POST" action="{{ route('password.email') }}">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="fp__login_imput">
+                                            <label for="email">{{ __('Email') }}</label>
+                                            <input class="border border-0 rounded-pill" id="email" name="email" type="email" placeholder="Email"
+                                                   value="{{old('email')}}" required autofocus>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xl-12">
+                                        <div class="fp__login_imput">
+                                            <button type="submit"
+                                                    class="common_btn"> {{ __('Email Password Reset Link') }}</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                            <p class="create_account d-flex justify-content-between">
+                                <a href="sign_in.html">login</a>
+                                <a href="sign_up.html">Create Account</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=========================
+        FORGOT PASSWORD END
+    ==========================-->
+
+@stop

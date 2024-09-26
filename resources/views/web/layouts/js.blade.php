@@ -1,6 +1,7 @@
 
 <!--jquery library js-->
 <script src="{{ asset('web/js/jquery-3.6.0.min.js') }}"></script>
+{{--<script src="{{ asset('build/assets/app-DI6-W-r-.js') }}"></script>--}}
 <!--bootstrap js-->
 <script src="{{ asset('web/js/bootstrap.bundle.min.js') }}"></script>
 <!--font-awesome js-->
@@ -27,6 +28,15 @@
 
 <!--main/custom js-->
 <script src="{{ asset('web/js/main.js') }}"></script>
+<script src="{{ asset('build/assets/toastr.min.js') }}"></script>
+
+<script>
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+             toastr.error("{{ $error }}")
+        @endforeach
+    @endif
+</script>
 @stack('web-js')
 </body>
 

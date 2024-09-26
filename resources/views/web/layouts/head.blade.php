@@ -7,6 +7,7 @@
     <title>
         @yield('title',"FoodPark Restaurant")
     </title>
+{{--    <link rel="stylesheet" href="{{ asset('build/assets/app-Dmdv8mED.css') }}">--}}
     <link rel="icon" type="image/png" href="{{ asset('web/images/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('web/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/bootstrap.min.css') }}">
@@ -16,9 +17,10 @@
     <link rel="stylesheet" href="{{ asset('web/css/venobox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/jquery.exzoom.css') }}">
-
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/toastr.min.css') }}">
+
     @stack('web-css')
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
