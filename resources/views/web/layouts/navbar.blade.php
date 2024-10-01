@@ -3,7 +3,7 @@
 ==============================-->
 <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('web/images/logo.png') }}" alt="FoodPark" class="img-fluid">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">about</a>
@@ -63,9 +63,25 @@
                 <li>
                     <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span>5</span></a>
                 </li>
-                <li>
-                    <a href="dashboard.html"><i class="fas fa-user"></i></a>
-                </li>
+                @if(Auth::user())
+                    <li class="dropdown">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                             onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                <i class="fas fa-sign-out-alt"></i>   {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>                </li>
+                @else
+                    <li class="">
+
+                        <a href="{{ route('login') }}"><i class="fas fa-user"></i></a>
+                    </li>
+                @endif
+
+
                 <li>
                     <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">reservation</a>
                 </li>

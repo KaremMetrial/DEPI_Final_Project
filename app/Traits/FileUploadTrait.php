@@ -5,6 +5,7 @@ namespace App\Traits;
 use Illuminate\Http\Request;
 trait FileUploadTrait
 {
+
     public function uploadImage(Request $request, $inputName, $path = 'uploads/')
     {
         $storagePath = public_path($path);
@@ -14,6 +15,7 @@ trait FileUploadTrait
             $ext = $image->getClientOriginalExtension();
             $imageName = 'media_' . uniqid() . '.' . $ext;
 
+            // Move the file to the storage path
             $image->move($storagePath, $imageName);
 
             return $path . $imageName;
