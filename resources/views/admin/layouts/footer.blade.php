@@ -28,7 +28,8 @@
 <script src="{{ asset('admin/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 <script src="{{ asset('admin/js/page/features-post-create.js') }}"></script>
 
-
+<script src="https://cdn.datatables.net/2.1.7/js/dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script src="{{ asset('build/assets/toastr.min.js') }}"></script>
@@ -40,6 +41,7 @@
     @endforeach
     @endif
 </script>
+
 @stack('admin-js')
 </body>
 </html>
