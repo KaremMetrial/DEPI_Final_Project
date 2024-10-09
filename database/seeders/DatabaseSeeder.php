@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
 //            'email' => 'test@example.com',
 //        ]);
         $this->call([
-            UserSeeder::class,
+//            UserSeeder::class,
+            CategorySeeder::class,
         ]);
 
         Slider::factory(3)->create();

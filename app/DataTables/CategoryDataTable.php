@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Slider;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SliderDataTable extends DataTable
+class CategoryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,13 +23,9 @@ class SliderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('admin.slider.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
-                $delete = "<a  href='" . route('admin.slider.destroy', $query->id) . "' class='btn btn-danger ml-2 delete_item'><i class='fas fa-trash'></i></a>";
+                $edit = "<a href='" . route('admin.category.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
+                $delete = "<a  href='" . route('admin.category.destroy', $query->id) . "' class='btn btn-danger ml-2 delete_item'><i class='fas fa-trash'></i></a>";
                 return $edit . $delete;
-            })
-            ->addColumn('image', function ($query) {
-                $iamge = "<img width='150px' src='" . asset($query->image) . "'>";
-                return $iamge;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status == 1) {
@@ -38,14 +34,22 @@ class SliderDataTable extends DataTable
                     $status = "<span class='badge badge-danger'>InActive</span>";
                 }
                 return $status;
-            })->rawColumns(['image', 'action', 'status'])
+            })
+            ->addColumn('show at home', function ($query) {
+                if ($query->show_at_home == 1) {
+                    $show_at_home = "<span class='badge badge-primary'>Yes</span>";
+                }else {
+                    $show_at_home = "<span class='badge badge-danger'>No</span>";
+                }
+                return $show_at_home;
+            })->rawColumns(['action', 'status', 'show at home'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Slider $model): QueryBuilder
+    public function query(Category $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -56,20 +60,20 @@ class SliderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('slider-table')
-            ->columns($this->getColumns())
-            ->minifiedAjax()
-            //->dom('Bfrtip')
-            ->orderBy(0)
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            ]);
+                    ->setTableId('category-table')
+                    ->columns($this->getColumns())
+                    ->minifiedAjax()
+                    //->dom('Bfrtip')
+                    ->orderBy(1)
+                    ->selectStyleSingle()
+                    ->buttons([
+                        Button::make('excel'),
+                        Button::make('csv'),
+                        Button::make('pdf'),
+                        Button::make('print'),
+                        Button::make('reset'),
+                        Button::make('reload')
+                    ]);
     }
 
     /**
@@ -80,17 +84,14 @@ class SliderDataTable extends DataTable
         return [
             Column::make('id')
                 ->width(60),
-            Column::make('image'),
-            Column::make('title'),
-            Column::make('sub_title'),
-            Column::make('short_description'),
+            Column::make('name'),
             Column::make('status'),
+            Column::make('show at home'),
             Column::computed('action')
                 ->width(150)
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),
-
         ];
     }
 
@@ -99,6 +100,6 @@ class SliderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Slider_' . date('YmdHis');
+        return 'Category_' . date('YmdHis');
     }
 }

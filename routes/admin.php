@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 
 // Define the route for the dashboard
@@ -17,3 +19,8 @@ Route::put('/profile/password',[ProfileController::class,'updatePassword'])->nam
 //======================================Slider=========================================
 Route::resource('/slider',SliderController::class);
 //======================================Slider=========================================
+
+//====================================== Category =========================================
+Route::resource('/category',CategoryController::class);
+//====================================== Category =========================================
+
