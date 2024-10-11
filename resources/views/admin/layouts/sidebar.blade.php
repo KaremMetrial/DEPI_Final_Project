@@ -71,14 +71,19 @@
             <li class="{{ Str::startsWith(Route::currentRouteName(), 'admin.slider') ? 'active' : '' }}"><a
                     class="nav-link" href="{{ route('admin.slider.index') }}"><i class="far fa-square"></i>
                     <span>Slider</span></a></li>
-
-            <li class="dropdown {{ Str::startsWith(Route::currentRouteName(), 'admin.category') ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Restaurant</span></a>
+            <li class="dropdown {{ Str::startsWith(Route::currentRouteName(), 'admin.category') || Str::startsWith(Route::currentRouteName(), 'admin.product') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                    <i class="fas fa-columns"></i> <span>Manage Restaurant</span>
+                </a>
                 <ul class="dropdown-menu">
                     <li class="{{ Str::startsWith(Route::currentRouteName(), 'admin.category') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('admin.category.index') }}"
-                           onclick="event.stopPropagation();">
-                            <i class="far fa-square"></i> <span>Category</span>
+                        <a class="nav-link" href="{{ route('admin.category.index') }}" >
+                            <i class="far fa-square"></i> <span>Products Category</span>
+                        </a>
+                    </li>
+                    <li class="{{ Str::startsWith(Route::currentRouteName(), 'admin.product') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('admin.product.index') }}" >
+                            <i class="far fa-square"></i> <span>Products</span>
                         </a>
                     </li>
                 </ul>

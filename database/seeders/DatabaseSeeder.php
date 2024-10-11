@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
 
@@ -23,9 +24,11 @@ class DatabaseSeeder extends Seeder
 //        ]);
         $this->call([
 //            UserSeeder::class,
-            CategorySeeder::class,
+//            CategorySeeder::class,
+//            ProductSeeder::class
         ]);
+        Product::factory(10)->create();
 
-        Slider::factory(3)->create();
+//        Slider::factory(3)->create();
     }
 }
