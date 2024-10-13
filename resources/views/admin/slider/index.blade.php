@@ -52,9 +52,9 @@
                                     //     text: "Your file has been deleted.",
                                     //     icon: "success"
                                     // });
-                                    toastr.success('Your data has been deleted successfully.')
                                     // $('#slider-table').DataTable().draw();
                                     window.location.reload();
+                                    toastr.success('Your     data has been deleted successfully.')
                                 }else{
                                     toastr.error('Your data deleted  failed .')
                                 }

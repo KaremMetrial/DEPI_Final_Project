@@ -25,7 +25,17 @@ class ProductDataTable extends DataTable
             ->addColumn('action', function ($query) {
                 $edit = "<a href='" . route('admin.product.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
                 $delete = "<a  href='" . route('admin.product.destroy', $query->id) . "' class='btn btn-danger ml-2 delete_item'><i class='fas fa-trash'></i></a>";
-                return $edit . $delete;
+                $more = "<div class='btn-group drop-left ml-2'>
+            <button type='button' class='btn btn-dark dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                <i class='fas fa-cog'></i>
+            </button>
+            <div class='dropdown-menu dropleft'>
+                <a href='" . route('admin.product-gallery.show',$query->id) . "' class='dropdown-item'>Product Gallery</a>
+                <a href='" . route('admin.product-size.show',$query->id) . "' class='dropdown-item'>Product Variants</a>
+            </div>
+         </div>";
+
+                return $edit . $delete . $more;
             })
             ->addColumn('image', function ($query) {
                 $iamge = "<img width='150px' src='" . asset($query->thumb_image) . "'>";
@@ -97,7 +107,7 @@ class ProductDataTable extends DataTable
             Column::make('status'),
             Column::make('show at home'),
             Column::computed('action')
-                ->width(150)
+                ->width(250)
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),
