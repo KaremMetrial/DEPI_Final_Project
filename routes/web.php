@@ -6,11 +6,9 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\FrontendController;
 use Illuminate\Support\Facades\Route;
 
-Route::group([],function (){
-
-});
+//========================== Home Page ===========================================
 Route::get('/', [FrontendController::class , 'index'])->name('home');
-//====================================================
+//=========================== Home Page ==========================================
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,6 +30,11 @@ Route::middleware(['auth'])->group(function () {
 //Route::group(['middleware' => 'auth'],function (){
 //    Route::put('/profile',[ProfileController::class,'store'])->name('dashboard');
 //});
+
+//===================================== show product details =============================================
+Route::get('/product/{slug}', [FrontendController::class,'showProduct'])->name('product.show');
+//===================================== show product details =============================================
+
 
 
 require __DIR__ . '/auth.php';

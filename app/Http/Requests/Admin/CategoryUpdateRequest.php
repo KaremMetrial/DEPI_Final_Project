@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryUpdateRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255', 'unique:categories,name'],
+            'name' => ['required', 'max:255', 'unique:categories,name,' . $this->category],
             'status' => ['required','boolean'],
             'show_at_home' => ['required','boolean']
         ];
