@@ -88,7 +88,9 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="{{ Str::startsWith(Route::currentRouteName(), 'admin.setting') ? 'active' : '' }}"><a
+                    class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
+                    <span>Setting</span></a></li>
 
         </ul>
 

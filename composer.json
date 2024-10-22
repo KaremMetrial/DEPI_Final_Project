@@ -13,6 +13,7 @@
         "yoeunes/toastr": "^3.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.14",
         "barryvdh/laravel-ide-helper": "^3.1",
         "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.2",
@@ -28,7 +29,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/globalHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

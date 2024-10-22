@@ -63,10 +63,10 @@
                         </p>
                         <h3 class="price">
                             @if($product->offer_price > 0)
-                                ${{ $product->offer_price }}
-                                <del> ${{ $product->price }}</del>
+                                {{ currencyPosition($product->offer_price) }}
+                                <del>{{ currencyPosition($product->price) }}</del>
                             @else
-                                ${{ $product->price }}
+                                {{ currencyPosition($product->price) }}
                             @endif
                         </h3>
                         <p class="short_description">{{ $product->short_description }}</p>
@@ -87,35 +87,35 @@
                             </div>
                         @endif
 
-                            <div class="details_extra_item">
-                                <h5>select option <span>(optional)</span></h5>
-                                @foreach( $product->productOptions as $productOptions)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                               id="option-{{ $productOptions->id }}">
-                                        <label class="form-check-label" for="option-{{ $productOptions->id }}">
-                                            {{ $productOptions->name }} <span>+ ${{ $productOptions->price }}</span>
-                                        </label>
-                                    </div>
-                                @endforeach
-
-                            </div>
-
-                            <div class="details_quentity">
-                                <h5>select quentity</h5>
-                                <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
-                                    <div class="quentity_btn">
-                                        <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                        <input type="text" placeholder="1">
-                                        <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                    </div>
-                                    <h3>$320.00</h3>
+                        <div class="details_extra_item">
+                            <h5>select option <span>(optional)</span></h5>
+                            @foreach( $product->productOptions as $productOptions)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value=""
+                                           id="option-{{ $productOptions->id }}">
+                                    <label class="form-check-label" for="option-{{ $productOptions->id }}">
+                                        {{ $productOptions->name }} <span>+ ${{ $productOptions->price }}</span>
+                                    </label>
                                 </div>
+                            @endforeach
+
+                        </div>
+
+                        <div class="details_quentity">
+                            <h5>select quentity</h5>
+                            <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
+                                <div class="quentity_btn">
+                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
+                                    <input type="text" placeholder="1">
+                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                                </div>
+                                <h3>$320.00</h3>
                             </div>
-                            <ul class="details_button_area d-flex flex-wrap">
-                                <li><a class="common_btn" href="#">add to cart</a></li>
-                                <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
-                            </ul>
+                        </div>
+                        <ul class="details_button_area d-flex flex-wrap">
+                            <li><a class="common_btn" href="#">add to cart</a></li>
+                            <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-12 wow fadeInUp" data-wow-duration="1s">
@@ -260,46 +260,48 @@
                 </div>
             </div>
             @if(count($relatedProducts) > 0)
-            <div class="fp__related_menu mt_90 xs_mt_60">
-                <h2>related item</h2>
-                <div class="row related_product_slider">
-                    @foreach($relatedProducts as $relatedProduct)
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="fp__menu_item">
-                            <div class="fp__menu_item_img">
-                                <img src="{{ asset('web/'.$relatedProduct->thumb_image )}}" alt="menu" class="img-fluid w-100">
-                                <a class="category" href="#">{{ $relatedProduct->category->name }}</a>
+                <div class="fp__related_menu mt_90 xs_mt_60">
+                    <h2>related item</h2>
+                    <div class="row related_product_slider">
+                        @foreach($relatedProducts as $relatedProduct)
+                            <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
+                                <div class="fp__menu_item">
+                                    <div class="fp__menu_item_img">
+                                        <img src="{{ asset('web/'.$relatedProduct->thumb_image )}}" alt="menu"
+                                             class="img-fluid w-100">
+                                        <a class="category" href="#">{{ $relatedProduct->category->name }}</a>
+                                    </div>
+                                    <div class="fp__menu_item_text">
+                                        <p class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>74</span>
+                                        </p>
+                                        <a class="title"
+                                           href="{{ route('product.show',$relatedProduct->slug) }}">{{ $relatedProduct->name }}</a>
+                                        <h5 class="price">
+                                            @if($relatedProduct->offer_price > 0)
+                                                {{ currencyPosition($relatedProduct->offer_price) }}
+                                                <del>{{ currencyPosition($relatedProduct->price) }}</del>
+                                            @else
+                                                {{ currencyPosition($relatedProduct->price) }}
+                                            @endif
+                                        </h5>
+                                        <ul class="d-flex flex-wrap justify-content-center">
+                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                                        class="fas fa-shopping-basket"></i></a></li>
+                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="fp__menu_item_text">
-                                <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span>74</span>
-                                </p>
-                                <a class="title" href="{{ route('product.show',$relatedProduct->slug) }}">{{ $relatedProduct->name }}</a>
-                                <h5 class="price">
-                                    @if($relatedProduct->offer_price > 0)
-                                        ${{ $relatedProduct->offer_price }}
-                                        <del> ${{ $relatedProduct->price }}</del>
-                                    @else
-                                        ${{ $relatedProduct->price }}
-                                    @endif
-                                </h5>
-                                <ul class="d-flex flex-wrap justify-content-center">
-                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
-                                                class="fas fa-shopping-basket"></i></a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
             @endif
         </div>
     </section>

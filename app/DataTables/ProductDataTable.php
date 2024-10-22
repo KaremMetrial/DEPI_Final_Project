@@ -41,6 +41,12 @@ class ProductDataTable extends DataTable
                 $iamge = "<img width='150px' src='" . asset($query->thumb_image) . "'>";
                 return $iamge;
             })
+            ->addColumn('price' , function ($query){
+                return currencyPosition($query->price);
+            })
+            ->addColumn('offer_price' , function ($query){
+                return currencyPosition($query->offer_price);
+            })
             ->addColumn('status', function ($query) {
                 if ($query->status == 1) {
                     $status = "<span class='badge badge-primary'>Active</span>";
