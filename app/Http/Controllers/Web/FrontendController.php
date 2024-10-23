@@ -24,4 +24,10 @@
 
             return view('web.pages.product-details', compact('product', 'relatedProducts'));
         }
+
+        public function loadProductModel($productId)
+        {
+            $product = Product::with(['category', 'productImages','productSizes' ,'productOptions'])->findOrFail($productId);
+            return view('web.layouts.ajax.product-popup-model',compact('product'))->render();
+        }
     }

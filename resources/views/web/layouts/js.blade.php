@@ -37,6 +37,7 @@
         @endforeach
     @endif
 </script>
+@include('web.layouts.global-script')
 @stack('web-js')
 </body>
 

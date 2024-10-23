@@ -20,9 +20,16 @@
     <link rel="stylesheet" href="{{ asset('web/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('web/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/toastr.min.css') }}">
+    {{--    <link rel="stylesheet" href="{{ asset('web/css/custom.css') }}">--}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @stack('web-css')
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
 <body>
+<div class="overlay-container">
+    <div class="overlay">
+        <span class="loader"></span>
+    </div>
+</div>

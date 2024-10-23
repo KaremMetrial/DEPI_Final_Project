@@ -1,12 +1,15 @@
-<!--=============================
+@php use Gloudemans\Shoppingcart\Facades\Cart; @endphp
+    <!--=============================
     MENU START
 ==============================-->
+
 <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
             <img src="{{ asset('web/images/logo.png') }}" alt="FoodPark" class="img-fluid">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="far fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -61,7 +64,8 @@
                     </div>
                 </li>
                 <li>
-                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span>5</span></a>
+                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span
+                            class="cart_count">{{ count(Cart::content()) }}</span></a>
                 </li>
                 @if(Auth::user())
                     <li class="dropdown">
@@ -71,9 +75,10 @@
                             <x-dropdown-link :href="route('logout')"
                                              onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                <i class="fas fa-sign-out-alt"></i>   {{ __('Log Out') }}
+                                <i class="fas fa-sign-out-alt"></i> {{ __('Log Out') }}
                             </x-dropdown-link>
-                        </form>                </li>
+                        </form>
+                    </li>
                 @else
                     <li class="">
 
@@ -83,92 +88,58 @@
 
 
                 <li>
-                    <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">reservation</a>
+                    <a class="common_btn" href="#" data-bs-toggle="modal"
+                       data-bs-target="#staticBackdrop">reservation</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
 <div class="fp__menu_cart_area">
     <div class="fp__menu_cart_boody">
         <div class="fp__menu_cart_header">
-            <h5>total item (05)</h5>
+            <h5 class="">total item (<span class="cart_count">{{ count(Cart::content()) }}</span>)</h5>
             <span class="close_cart"><i class="fal fa-times"></i></span>
         </div>
-        <ul>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="{{ asset('web/images/menu8.png') }}" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href="#">Hyderabadi Biryani </a>
-                    <p class="size">small</p>
-                    <span class="extra">coca-cola</span>
-                    <span class="extra">7up</span>
-                    <p class="price">$99.00 <del>$110.00</del></p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="{{ asset('web/images/menu4.png') }}" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href="#">Chicken Masalas</a>
-                    <p class="size">medium</p>
-                    <span class="extra">7up</span>
-                    <p class="price">$70.00</p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="{{ asset('web/images/menu5.png') }}" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href="#">Competently Supply Customized Initiatives</a>
-                    <p class="size">large</p>
-                    <span class="extra">coca-cola</span>
-                    <span class="extra">7up</span>
-                    <p class="price">$120.00 <del>$150.00</del></p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="{{ asset('web/images/menu6.png') }}" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href="#">Hyderabadi Biryani</a>
-                    <p class="size">small</p>
-                    <span class="extra">7up</span>
-                    <p class="price">$59.00</p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="{{ asset('web/images/menu1.png') }}" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href="#">Competently Supply</a>
-                    <p class="size">medium</p>
-                    <span class="extra">coca-cola</span>
-                    <span class="extra">7up</span>
-                    <p class="price">$99.00 <del>$110.00</del></p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li>
+        <ul class="cart_contents">
+            @foreach(Cart::content() as $cartProduct)
+                <li>
+                    <div class="menu_cart_img">
+                        <img src="{{ asset($cartProduct->options->product_info['image']) }}" alt="menu"
+                             class="img-fluid w-100">
+                    </div>
+                    <div class="menu_cart_text">
+                        <a class="title"
+                           href="{{ route('product.show', $cartProduct->options->product_info['slug']) }}">{{ $cartProduct->name }}</a>
+                        <p class="size">Qty: {{ $cartProduct->qty }}</p>
+                        @if(optional($cartProduct->options->product_size)['name'] && optional($cartProduct->options->product_size)['price'])
+                            <p class="size">
+                                {{ optional($cartProduct->options->product_size)['name'] }}
+                                ({{ currencyPosition(optional($cartProduct->options->product_size)['price']) ?? '' }})
+                            </p>
+                        @endif
+                        @foreach($cartProduct->options->product_options as $cartProductOption)
+                            <span class="extra">{{$cartProductOption['name']}} ({{ currencyPosition($cartProductOption['price']) }})</span>
+                        @endforeach
+                        <p class="price">
+                            {{ currencyPosition($cartProduct->price) }}
+                        </p>
+                    </div>
+                    <span class="del_icon" onclick="removeProductFromSideBar('{{ $cartProduct->rowId }}')">
+                            <i class="fal fa-times"></i>
+                    </span>
+                </li>
+            @endforeach
         </ul>
-        <p class="subtotal">sub total <span>$1220.00</span></p>
+        <p class="subtotal">sub total <span class="cart_subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
         <a class="cart_view" href="cart_view.html"> view cart</a>
         <a class="checkout" href="check_out.html">checkout</a>
     </div>
 </div>
 
 <div class="fp__reservation">
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
